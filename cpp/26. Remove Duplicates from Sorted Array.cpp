@@ -20,6 +20,23 @@ Subscribe to see which companies asked this question
 class Solution {
 public:
     int removeDuplicates(vector<int>& nums) {
-        
+        if (nums.size() == 0)
+			return 0;
+		
+		int length = 0;
+		int point = 1;
+		
+		while (point != nums.size())
+		{
+			if (nums[point] != nums[length])
+			{
+				++ length;
+				nums[length] = nums[point];
+			}
+			
+			++ point;
+		}
+		
+		return length + 1;
     }
 };
