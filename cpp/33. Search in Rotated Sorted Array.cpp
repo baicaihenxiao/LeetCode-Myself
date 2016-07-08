@@ -19,6 +19,6 @@ You may assume no duplicate exists in the array.
 class Solution {
 public:
     int search(vector<int>& nums, int target) {
-        
+        int a;
     }
 };
