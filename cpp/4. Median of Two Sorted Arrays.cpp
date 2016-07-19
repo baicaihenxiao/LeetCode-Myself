@@ -26,27 +26,60 @@ The median is (2 + 3)/2 = 2.5
 
 class Solution {
 public:
-    double findMedianSortedArrays(vector<int>& nums1, vector<int>& nums2) {
-		
-		if (num1.size() > nums2.size())
+	double findMedianSortedArrays(vector<int>& nums1, vector<int>& nums2) {
+
+		//if (num1.size() > nums2.size())
+		//{
+		//	findMedianSortedArrays(nums2, nums1);
+		//}
+
+		int sum = nums1.size() + nums2.size();
+
+		if (sum & 0x1)//(end1 + end2) is odd
 		{
-			findMedianSortedArrays(nums2, nums1);
-		}
-		
-		int beg1 = 0, beg2 = 0;
-		int end1 = nums1.size();
-		int end2 = nums2.size();
-		int pos = 0;
-		if ((end1 + end2) & 0x1)//(end1 + end2) is odd
-		{
-			pos = (end1 + end2) / 2 + 1;
+			return findKthElement(nums1.begin(), nums1.size(), nums2.begin(), nums2.size(), sum / 2 + 1);
 		}
 		else
 		{
-			
+			return (findKthElement(nums1.begin(), nums1.size(), nums2.begin(), nums2.size(), sum / 2) + findKthElement(nums1.begin(), nums1.size(), nums2.begin(), nums2.size(), sum / 2 + 1)) / 2.0;
 		}
-   
-    }
-	
-	static findKthElement()
+
+	}
+
+private:
+	//kth: the k-th element, count from 1;
+	static int findKthElement(vector<int>::const_iterator itrA, int sA, vector<int>::const_iterator itrB, int sB, int kth)
+	{
+		if (sA > sB)//ensure sA < sB, otherwise exchange them;
+		{
+			return findKthElement(itrB, sB, itrA, sA, kth);
+		}
+
+		if (sA == 0)
+		{
+			return *(itrB + kth - 1);
+		}
+
+		if (kth == 1)
+		{
+			return *itrA > *itrB ? *itrB : *itrA;
+		}
+
+		int posA = kth / 2 > sA ? sA : kth / 2;
+		int posB = kth - posA;
+		
+		if (*(itrA + posA - 1) < *(itrB + posB - 1))
+		{
+			return findKthElement(itrA + posA, sA - posA, itrB, sB, kth - posA);
+		}
+		else if (*(itrA + posA - 1) > *(itrB + posB - 1))
+		{
+			return findKthElement(itrA, sA, itrB + posB, sB - posB, kth - posB);
+		}
+		else
+		{
+			return *(itrA + posA - 1);
+			//return itrA[posA - 1];
+		}
+	}
 };
