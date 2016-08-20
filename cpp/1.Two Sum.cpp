@@ -17,7 +17,6 @@ The return format had been changed to zero-based indices. Please read the above 
 
 */
 
-//to be solved
 
 class Solution {
 public:
