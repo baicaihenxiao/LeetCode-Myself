@@ -22,6 +22,25 @@ The return format had been changed to zero-based indices. Please read the above 
 class Solution {
 public:
     vector<int> twoSum(vector<int>& nums, int target) {
-        
+        std::unordered_map<int, int> mymap;
+		vector<int> res;
+		for (int i = 0; i < nums.size(); ++ i)
+		{
+			mymap[nums[i]] = i;
+		}
+		
+		for (int i = 0; i < nums.size(); ++ i)
+		{
+			int gap = target - nums[i];
+			auto iter = mymap.find(gap);
+			if (iter != mymap.end() && iter->second != i)
+			{
+				res.push_back(i);
+				res.push_back(iter->second);
+				break;
+			}
+		}
+		
+		return res;
     }
 };
