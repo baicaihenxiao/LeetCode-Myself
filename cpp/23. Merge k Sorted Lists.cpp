@@ -15,6 +15,9 @@ Merge k sorted linked lists and return it as one sorted list. Analyze and descri
  *     ListNode(int x) : val(x), next(NULL) {}
  * };
  */
+ 
+#include <limits>
+ 
 class Solution {
 public:
     ListNode* mergeKLists(vector<ListNode*>& lists) {
@@ -24,9 +27,14 @@ public:
 		
 		while (lists.size() != 0)
 		{
-			for (int i = 0; i < lists.size(); ++ i)
+			int var = std::numeric_limits<int>::max;
+			for (auto iter = lists.begin(); iter != lists.end(); ++ iter)
 			{
-				
+				ListNode* node = *iter;
+				if (node->next == 0)
+				{
+					
+				}
 			}
 		}
 		
