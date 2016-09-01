@@ -17,43 +17,83 @@ A valid Sudoku board (partially filled) is not necessarily solvable. Only the fi
 */
 
 #include <bitset>
+#include <iostream>
 using namespace std;
 
 class Solution {
 public:
     bool isValidSudoku(vector<vector<char>>& board) {
         
-		bitset<9> dup;
-		
-		for (auto i = board.begin(); i < board.end(); ++ i)
-		{
-			for (auto j = (*i).begin(); j < (*i).end(); ++ j)
-			{
-				if (dup.test(*j))
-				{
-					return false;
-				}
-				
-				dup.set(*j)
-			}
-			
-			dup.reset();
-		}
+		bitset<10> dup;
 		
 		for (int i = 0; i < 9; ++ i)
 		{
 			for (int j = 0; j < 9; ++ j)
 			{
-				if (dup.test(board.get(j).get(i)))
+				if (board[i][j] == '.')
+				{
+					continue;
+				}
+				
+				if (dup.test(board[i][j] - '0'))
 				{
 					return false;
 				}
-				dup.set(board.get(j).get(i));
+				
+				dup.set(board[i][j] - '0');
 			}
 			
 			dup.reset();
 		} 
 		
+		for (int i = 0; i < 9; ++ i)
+		{
+			for (int j = 0; j < 9; ++ j)
+			{
+				if (board[j][i] == '.')
+				{
+					continue;
+				}
+				
+				if (dup.test(board[j][i] - '0'))
+				{
+					return false;
+				}
+				dup.set(board[j][i] - '0');
+			}
+			
+			dup.reset();
+		} 
+		
+		for (int i = 0; i < 3; ++ i)
+		{
+			for (int j = 0; j < 3; ++ j)
+			{
+				dup.reset();
+				
+				for (int m = 3 * i; m < 3 * (i + 1); ++ m)
+				{
+					for (int n = 3 * j; n < 3 * (j + 1); ++ n)
+					{
+						if (board[m][n] == '.')
+						{
+							continue;
+						}
+						
+						
+						if (dup.test(board[m][n] - '0'))
+						{
+							return false;
+						}
+						
+						dup.set(board[m][n] - '0');
+					}
+				}
+				
+			}
+		}
+		
+		return true;
 		
 		
     }
