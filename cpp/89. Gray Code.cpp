@@ -20,12 +20,27 @@ For example, [0,2,3,1] is also a valid gray code sequence according to the above
 
 For now, the judge is able to judge based on one instance of gray code sequence. Sorry about that.
 
+
+
+
 */
 
 
 class Solution {
 public:
     vector<int> grayCode(int n) {
-        
+        	
+		int powN = 1 << n;
+		
+		vector<int> res(powN, 0);
+		
+		for (int i = 0; i != powN; ++ i)
+		{
+			
+			res[i] = i^(i >> 1);
+			
+		}
+		
+		return res;
     }
 };
