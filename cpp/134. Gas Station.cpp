@@ -17,5 +17,31 @@ class Solution {
 public:
     int canCompleteCircuit(vector<int>& gas, vector<int>& cost) {
         
+		int sol = 0;
+		int sum = 0;
+		int beg = -1;
+		
+		for (int i = 0; i < gas.size(); ++ i)
+		{
+			sum += gas[i] - cost[i];
+			sol += gas[i] - cost[i];
+			
+			if (sum < 0)
+			{
+				sum = 0;
+				beg = i;
+			}
+		}
+		
+		if (sol < 0)
+		{
+			return -1;
+		}
+		
+
+		
+		return (beg + 1);
+		
+		
     }
 };
