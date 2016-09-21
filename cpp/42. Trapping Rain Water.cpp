@@ -22,7 +22,7 @@ public:
 		
 		int indexMax = 0;
 		
-		for (int i = 0; i < height.size(); ++ i)
+		for (int i = 0; i < height.size(); ++ i)// find the highest bar ->indexMax;
 		{
 			if (height[i] > height[indexMax])
 			{
@@ -32,7 +32,7 @@ public:
 		
 		int peakTmp = 0;
 		
-		for (int i = 0; i < indexMax; ++ i)
+		for (int i = 0; i < indexMax; ++ i)//from left to indexMax, find all trap in [peakTmp, height[indexMax]];
 		{
 			if (height[i] > peakTmp)
 			{
@@ -46,7 +46,7 @@ public:
 		
 		peakTmp = 0;
 		
-		for (int i = height.size() - 1; i > indexMax; -- i)
+		for (int i = height.size() - 1; i > indexMax; -- i)//from right to indexMax, find all trap in [height[indexMax], peakTmp];
 		{
 			if (height[i] > peakTmp)
 			{
