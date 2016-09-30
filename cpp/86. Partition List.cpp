@@ -35,7 +35,7 @@ public:
 			greater = greater->next;
 		}
 		
-		less = greater;
+		less = greater;//ensure pointer less is in the behind of pointer greater;
 		
 		while (greater->next != nullptr)
 		{			
