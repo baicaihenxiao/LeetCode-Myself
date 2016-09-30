@@ -29,14 +29,21 @@ public:
 		ListNode* phead = &tmpHead;
 		ListNode* less = phead;
 		ListNode* greater = phead;
-		while (less->next != nullptr && greater->next != nullptr)
+		
+		while (greater->next != nullptr && greater->next->val < x)
+		{
+			greater = greater->next;
+		}
+		
+		less = greater;
+		
+		while (greater->next != nullptr)
 		{			
 			while (greater->next != nullptr && greater->next->val < x)
 			{
 				greater = greater->next;
 			}
 			
-			less = greater;
 			
 			while (less->next != nullptr && less->next->val >= x)
 			{
@@ -49,6 +56,12 @@ public:
 			}
 			
 			insertBBeforeA(greater, less);
+			
+/* 			if (greater->next->next != less)
+			{
+				greater = less;
+			} */
+			
 		}
 		
 		return phead->next;
