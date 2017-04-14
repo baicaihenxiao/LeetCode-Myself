@@ -16,10 +16,126 @@ spoilers alert... click to show requirements for atoi.
 
 */
 
+//八进制，十六进制
+// 加括号(-4)
+// 0099以零开头怎么处理
+// -0
+//+1
+
+#include <limits>
+#include <string>
+#include <sstream>
+#include <iostream>
+using namespace std;
 
 class Solution {
 public:
-    int myAtoi(string str) {
-        return atoi(str.c_str());
-    }
+
+	//Solution(){}
+	int myAtoi(string str) {
+
+
+		const int ERROR = 0;
+
+		if (str.size() == 0)
+		{
+			return 0;
+		}
+
+		int max = std::numeric_limits<int>::max();
+		int min = std::numeric_limits<int>::min();
+
+		string maxStr = to_string(max);
+		string minStr = to_string(min);
+
+		minStr = minStr.substr(1, minStr.size());
+
+		auto begMinStr = minStr.begin();
+		auto begMaxStr = maxStr.begin();
+
+
+		int symbol = 1;
+
+		auto it = str.begin();
+		for (; it < str.end() && (*it == ' '); ++ it )
+		{
+		}
+
+		for (; it < str.end() && (*it == '0'); ++it)
+		{
+		}
+
+		str = str.substr(it - str.begin(), str.size());
+
+		it = str.begin();
+
+		if (*it == '-')
+		{
+			symbol = -1;
+			++it;
+		}
+		else if (*it == '+')
+		{
+			symbol = 1;
+			++it;
+		}
+
+		str = str.substr(it - str.begin(), str.size());
+
+		string res;
+
+		it = str.begin();
+
+		if (*it > '9' || *it < '0')
+		{
+			return ERROR;
+		}
+
+		for (; (it < str.end()) && (it - str.begin() <= maxStr.size()); ++ it )
+		{
+			if (*it > '9' || *it < '0')
+			{
+				break;
+			}
+			else
+			{
+				res += *it;
+			}
+		}
+
+		if (it - str.begin() == (maxStr.size() + 1))
+		{
+			if (symbol == -1)
+			{
+				return min;
+			}
+			return max;
+		}
+
+		if (symbol == -1 && (res.size() == minStr.size()) && (res >= minStr))
+		{
+			return min;
+		}
+
+		if (symbol == 1 && (res.size() == maxStr.size()) && (res >= maxStr))
+		{
+			return max;
+		}
+		
+
+		istringstream ss(res);
+
+		int resInt = 0;
+		ss >> resInt;
+
+		return resInt*symbol;
+
+
+	}
 };
+
+/*int main()
+{
+	Solution s;
+	cout << s.myAtoi(string("23a8f"));
+}*/
