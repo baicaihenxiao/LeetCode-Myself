@@ -61,3 +61,11 @@ set N = N -1;
   );
 END
 ```
+
+### [178. Rank Scores](https://leetcode.com/problems/rank-scores/description/)
+
+###### count + distinct
+
+```sql
+select Score, (select  count(distinct Score) from Scores as t where s.Score <= t.Score ) as Rank from Scores as s order by Score desc
+```
