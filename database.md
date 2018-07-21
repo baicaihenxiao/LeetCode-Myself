@@ -47,3 +47,17 @@ WHERE   salary NOT IN (
 Ref:
 > [sql语句执行顺序](https://www.jianshu.com/p/bb19b6b0fdc3)
 
+### [177. Nth Highest Salary](https://leetcode.com/problems/nth-highest-salary/description/)
+
+不能limt N-1, 1 会报错
+
+```sql
+CREATE FUNCTION getNthHighestSalary(N INT) RETURNS INT
+BEGIN
+set N = N -1;
+  RETURN (
+      # Write your MySQL query statement below.
+      select IFNULL((select distinct Salary from Employee order by Salary desc limit N, 1), NULL)  
+  );
+END
+```
