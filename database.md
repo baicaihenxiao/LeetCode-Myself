@@ -76,6 +76,14 @@ select Score, (select  count(distinct Score) from Scores as t where s.Score <= t
 select distinct a1.Num as ConsecutiveNums from Logs a1, Logs a2, Logs a3 where a1.Id = a2.Id-1 and a2.Id = a3.Id - 1 and a1.Num = a2.Num and a2.Num = a3.Num
 ```
 
+### [183. Customers Who Never Order](https://leetcode.com/problems/customers-who-never-order/)
+> [MySQL query / clause execution order](https://stackoverflow.com/questions/24127932/mysql-query-clause-execution-order)
+> [sql(join on 和where的执行顺序）](https://www.cnblogs.com/Jessy/p/3525419.html)
+```sql
+select c.Name as Customers from Customers c left join Orders o on c.Id = o.CustomerId where o.Id is null;
+```
+
+
 ### OTHERS
 
 ###### case when
