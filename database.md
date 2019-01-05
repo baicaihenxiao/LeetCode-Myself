@@ -69,3 +69,46 @@ END
 ```sql
 select Score, (select  count(distinct Score) from Scores as t where s.Score <= t.Score ) as Rank from Scores as s order by Score desc
 ```
+
+### [180. Consecutive Numbers](https://leetcode.com/problems/consecutive-numbers/)
+注意这个无法解决Id不连续的表
+```sql
+select distinct a1.Num as ConsecutiveNums from Logs a1, Logs a2, Logs a3 where a1.Id = a2.Id-1 and a2.Id = a3.Id - 1 and a1.Num = a2.Num and a2.Num = a3.Num
+```
+
+### OTHERS
+
+###### case when
+
+```sql
+ update activity_seckill_scene_goods set remain_top = (CASE remain_top WHEN '-1' THEN '-1' ELSE remain_top + 5 END), utime = now() where id = 72
+
+update activity_reduction set activity_state = (CASE WHEN NOW() < start_time THEN 1 WHEN NOW() >= start_time AND NOW() < end_time THEN 2 WHEN NOW() >= end_time THEN 4 ELSE 4 END) where id = 1 AND activity_state = 7
+```
+
+###### DATE
+通过DATE获得日期部分，不过DATE(NOW())应该有其他函数替代，CURDATE()?
+```sql
+ DATE(coupon_receive_log.receive_time) = DATE(NOW());
+
+ SELECT NOW(),CURDATE(),CURTIME()
+```
+获取当前时间的两个前后整点
+```sql
+SELECT DATE_FORMAT(NOW(),'%Y-%m-%d %H:00:00'), ADDDATE(DATE_FORMAT(NOW(),'%Y-%m-%d %H'),interval 1 hour);
+
+SUBDATE(DATE_FORMAT(NOW(),'%Y-%m-%d %H'),interval 1 hour)
+```
+
+###### group by
+
+```sql
+select *, count(id) from activity_seckill_scene_goods where deleted = 1  group by activity_seckill_scene_id order by activity_seckill_scene_id, count(id) desc;
+```
+
+
+
+
+
+
+
