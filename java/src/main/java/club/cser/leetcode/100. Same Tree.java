@@ -1,3 +1,5 @@
+package club.cser.leetcode;
+
 /**
  * Definition for a binary tree node.
  * public class TreeNode {
@@ -7,7 +9,7 @@
  *     TreeNode(int x) { val = x; }
  * }
  */
-class Solution {
+class SameTree {
     public boolean isSameTree(TreeNode p, TreeNode q) {
         if (p == null && q == null) {
             return true;
@@ -25,5 +27,11 @@ class Solution {
 
 
 
+    }
+    public class TreeNode {
+       int val;
+       TreeNode left;
+       TreeNode right;
+       TreeNode(int x) { val = x; }
     }
 }

@@ -1,4 +1,6 @@
-class Solution {
+package club.cser.leetcode;
+
+class ValidPalindrome2 {
     public boolean validPalindrome(String s) {
         return isPalindromeWithDel(s, true);
     }

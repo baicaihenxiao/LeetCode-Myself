@@ -1,5 +1,7 @@
+package club.cser.leetcode;
+
 //brute force 2018-04-28 17:48:57
-class Solution {
+class TwoSum {
     public int[] twoSum(int[] nums, int target) {
 
         int[] res = {0, 1};

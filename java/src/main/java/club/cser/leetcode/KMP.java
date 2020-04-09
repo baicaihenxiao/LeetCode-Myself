@@ -1,5 +1,10 @@
-class Solution {
-       public int strStr(String haystack, String needle) {
+package club.cser.leetcode;
+
+import java.util.ArrayList;
+
+public class KMP {
+//https://leetcode.com/problems/implement-strstr/
+    public int strStr(String haystack, String needle) {
         return computeKMP(haystack, needle).get(0);
     }
 
@@ -42,7 +47,7 @@ class Solution {
                 }
             }
         }
-        
+
         //不匹配返回-1
         if (res.isEmpty()) {
             res.add(-1);

@@ -1,6 +1,6 @@
-package java;
+package club.cser.leetcode;
 
-class Solution {
+class LengthOfLastWord {
     public int lengthOfLastWord(String s) {
 
         if (s == null) {

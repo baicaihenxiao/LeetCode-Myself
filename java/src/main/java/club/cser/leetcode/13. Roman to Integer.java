@@ -1,9 +1,9 @@
-// 2019-7-12 11:10:01
+package club.cser.leetcode;// 2019-7-12 11:10:01
 // https://leetcode.com/problems/roman-to-integer/
 
 // 参考这个里面的评论，从后往前面扫，写得更优雅
 // https://leetcode.com/problems/roman-to-integer/discuss/6529/My-solution-for-this-question-but-I-don't-know-is-there-any-easier-way
-class Solution {
+class RomanToInteger {
     public int romanToInt(String s) {
         if (s.isEmpty()) {
             return 0;

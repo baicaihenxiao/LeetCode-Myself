@@ -1,5 +1,9 @@
+package club.cser.leetcode;
+
+import java.util.HashMap;
+
 //one pass hash 2018-04-28 18:30:35
-class Solution {
+class TwoSum1 {
     public int[] twoSum(int[] nums, int target) {
 
         HashMap<Integer, Integer> h = new HashMap<>();

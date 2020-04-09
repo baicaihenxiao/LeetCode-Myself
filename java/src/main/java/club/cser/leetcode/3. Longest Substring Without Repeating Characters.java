@@ -1,7 +1,9 @@
-//2018-05-01 14:37:41
+package club.cser.leetcode;//2018-05-01 14:37:41
 //答案里，如果假设字符集大小128个，可以直接创建128大小的数组解决。
 
-class Solution {
+import java.util.HashMap;
+
+class LongestSubstringWithout {
     public int lengthOfLongestSubstring(String s) {
 
         if (s == null)

@@ -1,4 +1,4 @@
-//2018-05-01 13:39:56
+package club.cser.leetcode;//2018-05-01 13:39:56
 
 
 /**
@@ -9,7 +9,7 @@
  *     ListNode(int x) { val = x; }
  * }
  */
-class Solution {
+class AddTwoNumbers {
     public ListNode addTwoNumbers(ListNode l1, ListNode l2) {
         ListNode res, tail;
 
@@ -63,4 +63,10 @@ class Solution {
 
         return res.next;
     }
+}
+
+class ListNode {
+     int val;
+     ListNode next;
+     ListNode(int x) { val = x; }
 }

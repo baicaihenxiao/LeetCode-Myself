@@ -1,4 +1,6 @@
-class Solution {
+package club.cser.leetcode;
+
+class ValidPalindrome {
     public boolean isPalindrome(String s) {
         if (s == null || s.isEmpty()) {
             return true;
