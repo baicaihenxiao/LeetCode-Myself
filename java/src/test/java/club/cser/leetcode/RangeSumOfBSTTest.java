@@ -48,4 +48,25 @@ public class RangeSumOfBSTTest {
         Assert.assertEquals(0, res);
 
     }
+
+    @Test
+    public void rangeSumBST_NoRecursivePreorder_WithBranchCut_Test() {
+        TreeNode root = createTreeNode1();
+
+        int res = new RangeSumOfBST().rangeSumBST_NoRecursivePreorder_WithBranchCut(root, 10, 20);
+        Assert.assertEquals(45, res);
+
+        res = new RangeSumOfBST().rangeSumBST_NoRecursivePreorder_WithBranchCut(root, 10, 15);
+        Assert.assertEquals(25, res);
+
+        res = new RangeSumOfBST().rangeSumBST_NoRecursivePreorder_WithBranchCut(root, 15, 20);
+        Assert.assertEquals(35, res);
+
+        res = new RangeSumOfBST().rangeSumBST_NoRecursivePreorder_WithBranchCut(root, 1, 13);
+        Assert.assertEquals(10, res);
+
+        res = new RangeSumOfBST().rangeSumBST_NoRecursivePreorder_WithBranchCut(root, 40, 50);
+        Assert.assertEquals(0, res);
+
+    }
 }
