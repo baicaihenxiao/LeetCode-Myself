@@ -19,7 +19,7 @@ public class KMPTest {
     public void testComputeLPS1() {
         String s = "AAAAABAAABA";
         ArrayList<Integer> list = new KMP().computeLPS(s);
-        LOGGER.info(list);
+//        LOGGER.info(list);
         Assert.assertEquals(list.size(), s.length());
     }
 
@@ -27,7 +27,7 @@ public class KMPTest {
     public void testComputeLPS2() {
         String s = "ababaca";
         ArrayList<Integer> list = new KMP().computeLPS(s);
-        LOGGER.info(list);
+//        LOGGER.info(list);
         Assert.assertEquals(list.size(), s.length());
     }
 
@@ -37,7 +37,7 @@ public class KMPTest {
         String needle = "aba";
         ArrayList<Integer> list = new KMP().computeKMP(haystack, needle);
         List<Integer> res = Lists.newArrayList(0, 2);
-        LOGGER.info(list);
+//        LOGGER.info(list);
         Assert.assertTrue(list.equals(res));
     }
 
@@ -47,7 +47,7 @@ public class KMPTest {
         String needle = "AABA";
         ArrayList<Integer> list = new KMP().computeKMP(haystack, needle);
         List<Integer> res = Lists.newArrayList(3, 7);
-        LOGGER.info(list);
+//        LOGGER.info(list);
         Assert.assertTrue(list.equals(res));
     }
 
@@ -57,7 +57,7 @@ public class KMPTest {
         String needle = "";
         ArrayList<Integer> list = new KMP().computeKMP(haystack, needle);
         List<Integer> res = Lists.newArrayList(0);
-        LOGGER.info(list);
+//        LOGGER.info(list);
         Assert.assertTrue(list.equals(res));
     }
 
@@ -67,7 +67,7 @@ public class KMPTest {
         String needle = "AABC";
         ArrayList<Integer> list = new KMP().computeKMP(haystack, needle);
         List<Integer> res = Lists.newArrayList(-1);
-        LOGGER.info(list);
+//        LOGGER.info(list);
         Assert.assertTrue(list.equals(res));
     }
 
@@ -77,10 +77,10 @@ public class KMPTest {
         KMP a = new KMP();
         KMP b = new KMP();
         Class<KMP> c = (Class<KMP>) a.getClass();
-        System.out.println(a.getClass().toGenericString());
-        System.out.println(b.getClass().toGenericString());
-        System.out.println(a.getClass() == b.getClass());
-        System.out.println(a.getClass() == c);
+//        System.out.println(a.getClass().toGenericString());
+//        System.out.println(b.getClass().toGenericString());
+//        System.out.println(a.getClass() == b.getClass());
+//        System.out.println(a.getClass() == c);
     }
 
 }

@@ -25,8 +25,8 @@ public class HelloTest {
 
         Assert.assertEquals(nums[res[0]] + nums[res[1]], target);
 
-        LOGGER.warn("log4jjj1111warn");
-        LOGGER.error("log4jjj1111error");
+//        LOGGER.warn("log4jjj1111warn");
+//        LOGGER.error("log4jjj1111error");
 
     }
 
@@ -35,7 +35,7 @@ public class HelloTest {
         Hello h = new Hello();
         int[] nums = {2, 6, 11, 15};
         int target = 9;
-        LOGGER.info("111111test2");
+//        LOGGER.info("111111test2");
 
         int[] res = h.twoSum(nums, target);
 
@@ -47,7 +47,7 @@ public class HelloTest {
         Hello h = new Hello();
         int[] nums = {2, 5, 11, 15};
         int target = 9;
-        LOGGER.info("111111test3");
+//        LOGGER.info("111111test3");
 
         try {
             int[] res = h.twoSum(nums, target);
