@@ -92,6 +92,35 @@ public class DecodeWaysIITest {
     @Test
     public void largeTest() {
         Assert.assertEquals(291868912 ,d.numDecodings("*********"));
+    }
+
+    @Test
+    public void normalTestSimplified() {
+        Assert.assertEquals(279, d.SimplifiedNumDecodings("*123*"));
+        Assert.assertEquals(11, d.SimplifiedNumDecodings("*1"));
+        Assert.assertEquals(81 + 15, d.SimplifiedNumDecodings("**"));
+        Assert.assertEquals(2, d.SimplifiedNumDecodings("12"));
+        Assert.assertEquals(1, d.SimplifiedNumDecodings("2"));
+        Assert.assertEquals(1, d.SimplifiedNumDecodings("52"));
+        Assert.assertEquals(3, d.SimplifiedNumDecodings("226"));
+        Assert.assertEquals(9, d.SimplifiedNumDecodings("*"));
+        Assert.assertEquals(18, d.SimplifiedNumDecodings("1*"));
+        Assert.assertEquals(9 + 6, d.SimplifiedNumDecodings("2*"));
+    }
+
+    @Test
+    public void extremePositiveTestSimplified() {
+        Assert.assertEquals(0 ,d.SimplifiedNumDecodings("0"));
+        Assert.assertEquals(0 ,d.SimplifiedNumDecodings("05"));
+        Assert.assertEquals(0 ,d.SimplifiedNumDecodings("00"));
+        Assert.assertEquals(0 ,d.SimplifiedNumDecodings("50"));
+        Assert.assertEquals(1 ,d.SimplifiedNumDecodings("10"));
+        Assert.assertEquals(0 ,d.SimplifiedNumDecodings("100"));
+    }
+
+    @Test
+    public void largeTestSimplified() {
+        Assert.assertEquals(291868912 ,d.SimplifiedNumDecodings("*********"));
 
     }
 }
