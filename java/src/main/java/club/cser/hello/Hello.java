@@ -1,5 +1,6 @@
 package club.cser.hello;
 
+import java.util.Arrays;
 import java.util.HashMap;
 
 public class Hello {
@@ -16,5 +17,19 @@ public class Hello {
         }
 
         throw new IllegalArgumentException("No solution");
+    }
+
+    public static void main(String[] args) {
+        System.out.println(Arrays.toString( f2() ));
+    }
+
+    static int[] f2(){
+        int[] ret = new int[]{0};
+        try {
+            return ret;  // 返回 [1]，finally内的修改效果起了作用
+        } finally {
+            ret[0]++;
+            System.out.println("finally执行");
+        }
     }
 }
