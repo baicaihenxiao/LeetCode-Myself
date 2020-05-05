@@ -30,4 +30,10 @@ public class BestTimetoBuyandSellStockwithCooldownTest {
         Assert.assertEquals(0, b.maxProfit(prices));
     }
 
+    @Test
+    public void basicTest2Simplfied() {
+        int[] prices = {1,2,3,4,5,1,2,3,4};
+        Assert.assertEquals(6, b.maxProfitSimplified(prices));
+    }
+
 }
