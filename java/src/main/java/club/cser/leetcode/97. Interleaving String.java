@@ -15,6 +15,8 @@ class InterleavingString {
             dp[0][i] = dp[0][i - 1] && (s3.charAt(i - 1) == s2.charAt(i - 1));
         }
 
+//        System.out.println(Arrays.toString(dp[0]));
+
         int currentRow = 1, previousRow = 0;
 
         for (int i = 1; i < s1.length() + 1; ++ i) {
@@ -24,9 +26,12 @@ class InterleavingString {
                         (dp[previousRow][j] && (s3.charAt(i + j - 1) == s1.charAt(i - 1)))
                         || (dp[currentRow][j - 1] && (s3.charAt(i + j - 1) == s2.charAt(j - 1)));
             }
+//            System.out.println(Arrays.toString(dp[currentRow]));
             currentRow = previousRow;
             previousRow = (currentRow + 1) % 2;
         }
+
+//      Arrays.stream(dp).map(Arrays::toString).forEach(System.out::println);
 
         return dp[previousRow][s2.length()];
     }
