@@ -20,7 +20,7 @@ class MinimumHeightTrees {
         }
 
         //初始化tree
-        List<HashSet<Integer>> tree = Stream.generate(HashSet<Integer>::new).limit(n).collect(Collectors.toList());
+        List<Set<Integer>> tree = Stream.generate(HashSet<Integer>::new).limit(n).collect(Collectors.toList());
 
         //将edges转化成List<HashSet<Integer>>
         Arrays.stream(edges).forEach(e -> {
