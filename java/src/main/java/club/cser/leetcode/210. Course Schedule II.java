@@ -6,6 +6,8 @@ import java.util.stream.IntStream;
 import java.util.stream.Stream;
 
 class CourseScheduleII {
+
+    // 方法1
     public int[] findOrder(int numCourses, int[][] prerequisites) {
 
         if (numCourses == 0)
@@ -52,4 +54,57 @@ class CourseScheduleII {
         return res.stream().mapToInt(Integer::intValue).toArray();
 
     }
+
+    // 方法2
+    public int[] topologicalSortingWithDfs(int numCourses, int[][] prerequisites) {
+        if (numCourses == 0)
+            return new int[0];
+
+        List<Integer>[] graph =
+                Stream.generate(ArrayList<Integer>::new).limit(numCourses).toArray(ArrayList[]::new);
+
+        for (int[] edgs: prerequisites) {
+            graph[edgs[1]].add(edgs[0]);
+        }
+
+        int[] visitedTimes = new int[numCourses];
+
+        // Stack<Integer> res = new Stack<>();
+        // 本来要用stack声明的，转成[]太麻烦了。
+        List<Integer> res = new ArrayList<>(numCourses);
+
+        for (int i = 0; i < numCourses; ++ i) {
+            if (visitedTimes[i] == 0)
+                if (!dfs(i, graph, visitedTimes, res))
+                    return new int[0];
+        }
+
+        return IntStream.range(0, numCourses).map(i -> res.get(numCourses - i - 1)).toArray();
+
+    }
+
+    /*
+    返回true表示为无环图，false有环
+     */
+    boolean dfs(int currentNode, final List<Integer>[] graph, int[] visitedTimes, List<Integer> res) {
+
+        if (visitedTimes[currentNode] == 1)
+            return false;
+
+        if (visitedTimes[currentNode] == 2)
+            return true;
+
+        visitedTimes[currentNode] = 1;
+
+        for (int nextNode: graph[currentNode])
+            if (!dfs(nextNode, graph, visitedTimes, res))
+                return false;
+
+        res.add(currentNode);
+
+        visitedTimes[currentNode] = 2;
+
+        return true;
+    }
+
 }
