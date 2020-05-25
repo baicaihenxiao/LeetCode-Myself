@@ -6,7 +6,7 @@ import java.util.stream.IntStream;
 import java.util.stream.Stream;
 
 class CourseSchedule {
-    
+
     public boolean canFinish(int numCourses, int[][] prerequisites) {
         if (numCourses == 0 || numCourses == 1)
             return true;
@@ -16,13 +16,13 @@ class CourseSchedule {
         List<List<Integer>> edges = Stream.generate(ArrayList<Integer>::new).limit(numCourses).collect(Collectors.toList());
 
         Arrays.stream(prerequisites).forEach(e -> {
-            edges.get(e[0]).add(e[1]);
-            if (indegree.containsKey(e[1]))
-                indegree.replace(e[1], indegree.get(e[1]) + 1);
+            edges.get(e[1]).add(e[0]);
+            if (indegree.containsKey(e[0]))
+                indegree.replace(e[0], indegree.get(e[0]) + 1);
             else
-                indegree.put(e[1], 1);
+                indegree.put(e[0], 1);
 
-            indegree.computeIfAbsent(e[0], k -> 0);
+            indegree.computeIfAbsent(e[1], k -> 0);
         });
 
 //        System.out.println(indegree);
