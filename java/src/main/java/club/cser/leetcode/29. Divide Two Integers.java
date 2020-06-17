@@ -43,9 +43,9 @@ class DivideTwoIntegers {
                 mulTest += mulList.get(i);
                 res += 1 << i;
             }
-            System.out.println(res);
+//            System.out.println(res);
         }
-        System.out.println(mulList);
+//        System.out.println(mulList);
 
         return isPositive ? res : -res;
     }

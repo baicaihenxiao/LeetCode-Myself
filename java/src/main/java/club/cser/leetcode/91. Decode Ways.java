@@ -58,8 +58,8 @@ class DecodeWays {
             if (oneDigit > 0 && oneDigit < 10)
                 dp.set(i + 1, dp.get(i) + dp.get(i + 1));
         }
-        System.out.println(s);
-        System.out.println(dp);
+//        System.out.println(s);
+//        System.out.println(dp);
 
         return dp.get(s.length());
     }
