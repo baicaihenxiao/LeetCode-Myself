@@ -12,7 +12,8 @@ class SortAnArray {
 //        return insertionSort(nums);
 //        return selectionSort(nums);
 //        return maxHeapSort(nums);
-        new QuickSort().quickSort(nums, 0, nums.length - 1);
+//        new QuickSort().quickSort(nums, 0, nums.length - 1);
+        new MergeSort().mergesortTopDown(nums, 0, nums.length - 1);
         return nums;
 
     }
@@ -184,58 +185,63 @@ class QuickSort {
 
 class MergeSort {
     // right是包含的
-    public void mergesort(int[] nums, int left, int right) {
+    public void mergesortTopDown(int[] nums, int left, int right) {
         if (left < right) {
             int middle = left + (right - left) / 2; // 不要(left + right) / 2， right很大时迭代到右半部分计算时会越界。
-            mergesort(nums, left, middle);
-            mergesort(nums, middle + 1, right);
-            merge(nums, left, right);
+            mergesortTopDown(nums, left, middle);
+            mergesortTopDown(nums, middle + 1, right);
+            mergeTopDown(nums, left, right);
         }
     }
 
-    public void merge(int[] nums, int left, int right) {
+    public void mergeTopDown(int[] nums, int left, int right) {
+        int[] tmp = new int[right - left + 1];
+        int tmpCnt = 0;
 
+        int middle = left + (right - left) / 2;
+        int i = left, j= middle + 1;
 
-
-    }
-}
-
-
-
-class Solution {
-
-    public static void main(String[] args) {
-        int[] nums = {-1,2,-8,-10};
-        new Solution().sortArray(nums);
-        System.out.println(Arrays.toString(nums));
-    }
-
-    public List<Integer> sortArray(int[] nums) {
-        List<Integer> res = new ArrayList<>();
-        if (nums == null || nums.length == 0) return res;
-        mergeSort(nums, 0, nums.length - 1);
-        for (int i : nums) res.add(i);
-        return res;
-    }
-    private void mergeSort(int[] nums, int l, int r) {
-        if (l >= r) return;
-        int mid = l + (r - l) / 2;
-        mergeSort(nums, l, mid);
-        mergeSort(nums, mid + 1, r);
-        merge(nums, l, r);
-    }
-    private void merge(int[] nums, int l, int r) {
-        int mid = l + (r - l) / 2;
-        int[] tmp = new int[r - l + 1];
-        int i = l, j = mid + 1, k = 0;
-        while (i <= mid || j <= r) {
-            if (i > mid || j <= r && nums[i] > nums[j]) {
-                tmp[k++] = nums[j++];
+        // 这个写法很巧妙 直接抄的
+        while (i <= middle || j <= right) {
+            // 左半边遍历完， 或者右半边没遍历完但是右边的小，就取右边的， 其余情况都取左边的
+            if (i > middle || (j <= right && nums[i] > nums[j])) {
+                tmp[tmpCnt++] = nums[j++];
             } else {
-                tmp[k++] = nums[i++];
+                tmp[tmpCnt++] = nums[i++];
             }
         }
-        System.arraycopy(tmp, 0, nums, l, r - l + 1);
+
+        System.arraycopy(tmp, 0, nums, left, right - left + 1);
     }
+
+/*
+
+如果要用space的话， 调用方只能对整个数组排序，不能有left和right，否则不知道该用space的哪一部分。
+
+https://en.wikipedia.org/wiki/Merge_sort#Top-down_implementation
+
+用space主要是为了不用每次都申请空间，在最开始就把原始数组复制到space， merge时直接用nums在迭代时存储最终结果。
+
+    public void mergesort(int[] nums, int left, int right) {
+        if (left < right) {
+            int[] space = new int[right - left + 1];
+            System.arraycopy(nums, left, space, 0, right - left + 1);
+            mergesort(nums, left, right, space);
+        }
+    }
+
+
+    // right是包含的
+    private void mergesort(int[] nums, int left, int right, int[] space) {
+        if (left < right) {
+            int middle = left + (right - left) / 2; // 不要(left + right) / 2， right很大时迭代到右半部分计算时会越界。
+            mergesort(nums, left, middle, space);
+            mergesort(nums, middle + 1, right, space);
+            merge(nums, left, right, space);
+        }
+    }
+
+    private void merge(int[] nums, int left, int right, int[] space) {
+    }*/
 }
 
