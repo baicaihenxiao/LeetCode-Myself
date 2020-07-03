@@ -1,6 +1,9 @@
 package club.cser.leetcode;
 
 import java.util.*;
+import java.util.function.BiConsumer;
+import java.util.function.Function;
+import java.util.function.IntBinaryOperator;
 import java.util.stream.IntStream;
 import java.util.stream.Stream;
 
@@ -95,6 +98,51 @@ class MaximumGap {
 
         return res;
 
+    }
+
+
+    // 基数排序
+    public int maximumGap2(int[] nums) {
+        if (nums.length < 2) return 0;
+
+        int max = IntStream.of(nums).max().getAsInt();
+
+        // 基数
+        final int radix = 10;
+        // 位数
+        final int digits = String.valueOf(max).length();
+
+        int curMod = 1;
+
+        int[] tmpNums = new int[nums.length];
+
+        IntBinaryOperator getCurrentDigit = (num, mod) -> (num / mod) % radix; // 比 先 % 后 / 好，因为这个模数恒定为10。
+
+        for (int i = 0; i < digits; i++) {
+
+            int[] counts = new int[radix];
+
+            for (int c: nums)
+                ++ counts[getCurrentDigit.applyAsInt(c, curMod)];
+
+            for (int j = 1; j < counts.length; ++ j) {
+                counts[j] += counts[j - 1];
+            }
+
+            for (int j = nums.length - 1; j >= 0 ; -- j) {
+                tmpNums[-- counts[getCurrentDigit.applyAsInt(nums[j], curMod)]] = nums[j];
+            }
+            System.arraycopy(tmpNums, 0, nums, 0, nums.length);
+            curMod *= radix;
+        }
+
+        int res = 0;
+
+        for (int i = 1; i < nums.length; i++) {
+            res = Math.max(res, nums[i] - nums[i - 1]);
+        }
+
+        return res;
     }
 
 
