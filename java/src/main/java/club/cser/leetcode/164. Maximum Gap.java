@@ -145,6 +145,72 @@ class MaximumGap {
         return res;
     }
 
+    // 基数排序2 对负数有效
+    public int maximumGap3(int[] nums) {
+        if (nums.length < 2) return 0;
+
+        int max = IntStream.of(nums).max().getAsInt();
+
+        // 基数
+        final int radix = 256;
+        // 位数
+        final int digits = 4;
+
+        int curShiftMod = 0;
+
+        int[] tmpNums = new int[nums.length];
+
+        IntBinaryOperator getCurrentDigit = (num, mod) -> (num >>> mod) & 0XFF;
+
+        // 前三位
+        for (int i = 0; i < 3; i++) {
+
+            int[] counts = new int[radix];
+
+            for (int c: nums)
+                ++ counts[getCurrentDigit.applyAsInt(c, curShiftMod)];
+
+            for (int j = 1; j < counts.length; ++ j) {
+                counts[j] += counts[j - 1];
+            }
+
+            for (int j = nums.length - 1; j >= 0 ; -- j) {
+                tmpNums[-- counts[getCurrentDigit.applyAsInt(nums[j], curShiftMod)]] = nums[j];
+            }
+            System.arraycopy(tmpNums, 0, nums, 0, nums.length);
+            curShiftMod += 8; // 256 = 2 ^ 8
+
+            System.out.println(Arrays.toString(nums));
+
+        }
+
+        // 第四位
+        getCurrentDigit = (num, mod) -> (num >>> mod) ^ 0X80; // 翻转最高位
+
+        int[] counts = new int[radix];
+        for (int c: nums)
+            ++ counts[getCurrentDigit.applyAsInt(c, curShiftMod)];
+
+        for (int j = 1; j < counts.length; ++ j) {
+            counts[j] += counts[j - 1];
+        }
+
+        for (int j = nums.length - 1; j >= 0 ; -- j) {
+            tmpNums[-- counts[getCurrentDigit.applyAsInt(nums[j], curShiftMod)]] = nums[j];
+        }
+        System.arraycopy(tmpNums, 0, nums, 0, nums.length);
+
+        System.out.println(Arrays.toString(nums));
+
+
+        int res = 0;
+
+        for (int i = 1; i < nums.length; i++) {
+            res = Math.max(res, nums[i] - nums[i - 1]);
+        }
+
+        return res;
+    }
 
 
 
