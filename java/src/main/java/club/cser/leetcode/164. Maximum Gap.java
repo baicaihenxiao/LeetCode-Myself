@@ -145,63 +145,25 @@ class MaximumGap {
         return res;
     }
 
+
+}
+
+class RadixSortForNegativeInteger {
     // 基数排序2 对负数有效
-    public int maximumGap3(int[] nums) {
+    public int sort(int[] nums) {
         if (nums.length < 2) return 0;
 
         int max = IntStream.of(nums).max().getAsInt();
 
         // 基数
         final int radix = 256;
-        // 位数
-        final int digits = 4;
-
-        int curShiftMod = 0;
-
-        int[] tmpNums = new int[nums.length];
-
-        IntBinaryOperator getCurrentDigit = (num, mod) -> (num >>> mod) & 0XFF;
 
         // 前三位
         for (int i = 0; i < 3; i++) {
-
-            int[] counts = new int[radix];
-
-            for (int c: nums)
-                ++ counts[getCurrentDigit.applyAsInt(c, curShiftMod)];
-
-            for (int j = 1; j < counts.length; ++ j) {
-                counts[j] += counts[j - 1];
-            }
-
-            for (int j = nums.length - 1; j >= 0 ; -- j) {
-                tmpNums[-- counts[getCurrentDigit.applyAsInt(nums[j], curShiftMod)]] = nums[j];
-            }
-            System.arraycopy(tmpNums, 0, nums, 0, nums.length);
-            curShiftMod += 8; // 256 = 2 ^ 8
-
-            System.out.println(Arrays.toString(nums));
-
+            countingSort(nums, radix, i * 8, (num, mod) -> (num >>> mod) & 0XFF); // 右移用 >>>，否则会用符号位填充
         }
-
         // 第四位
-        getCurrentDigit = (num, mod) -> (num >>> mod) ^ 0X80; // 翻转最高位
-
-        int[] counts = new int[radix];
-        for (int c: nums)
-            ++ counts[getCurrentDigit.applyAsInt(c, curShiftMod)];
-
-        for (int j = 1; j < counts.length; ++ j) {
-            counts[j] += counts[j - 1];
-        }
-
-        for (int j = nums.length - 1; j >= 0 ; -- j) {
-            tmpNums[-- counts[getCurrentDigit.applyAsInt(nums[j], curShiftMod)]] = nums[j];
-        }
-        System.arraycopy(tmpNums, 0, nums, 0, nums.length);
-
-        System.out.println(Arrays.toString(nums));
-
+        countingSort(nums, radix, 24, (num, mod) -> (num >>> mod) ^ 0X80); // 翻转最高位
 
         int res = 0;
 
@@ -212,6 +174,22 @@ class MaximumGap {
         return res;
     }
 
+    private void countingSort(int[] nums, int radix, int currentByte, IntBinaryOperator getCurrentDigit) {
+        int[] counts = new int[radix];
+        int[] tmpNums = new int[nums.length];
 
+        for (int c: nums)
+            ++ counts[getCurrentDigit.applyAsInt(c, currentByte)];
 
+        for (int j = 1; j < counts.length; ++ j) {
+            counts[j] += counts[j - 1];
+        }
+
+        for (int j = nums.length - 1; j >= 0 ; -- j) {
+            tmpNums[-- counts[getCurrentDigit.applyAsInt(nums[j], currentByte)]] = nums[j];
+        }
+        System.arraycopy(tmpNums, 0, nums, 0, nums.length);
+
+        System.out.println(Arrays.toString(nums));
+    }
 }
