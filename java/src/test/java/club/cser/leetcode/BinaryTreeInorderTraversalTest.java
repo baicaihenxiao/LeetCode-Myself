@@ -39,6 +39,7 @@ public class BinaryTreeInorderTraversalTest {
         List<Integer> res = Arrays.asList(1, 3, 2);
 
         Assert.assertEquals(res, s.inorderTraversal(root));
+        Assert.assertEquals(res, s.inorderMorrisTraversal(root));
     }
 
 }

@@ -41,4 +41,36 @@ class BinaryTreeInorderTraversal {
         }
         return res;
     }
+
+    public List<Integer> inorderMorrisTraversal(TreeNode root) {
+
+
+        List<Integer> res = new ArrayList<>();
+        TreeNode cur = root;
+
+        while (null != cur) {
+            if (null != cur.left) {
+                TreeNode rightMostNodeOfLeftSubtree = cur.left;
+
+                while (rightMostNodeOfLeftSubtree.right != null && rightMostNodeOfLeftSubtree.right != cur)
+                    rightMostNodeOfLeftSubtree = rightMostNodeOfLeftSubtree.right;
+
+                if (rightMostNodeOfLeftSubtree.right == null) {
+                    rightMostNodeOfLeftSubtree.right = cur;
+                    cur = cur.left;
+                } else {
+                    rightMostNodeOfLeftSubtree.right = null;
+
+                    res.add(cur.val);
+                    cur = cur.right;
+                }
+            } else {
+                res.add(cur.val);
+                cur = cur.right;
+            }
+        }
+
+        return res;
+    }
+
 }
