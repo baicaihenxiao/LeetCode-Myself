@@ -9,7 +9,6 @@ import java.util.Arrays;
 import java.util.List;
 
 public class TreePostorderTraversalTest {
-    static final Logger LOGGER = LogManager.getLogger(TreePostorderTraversalTest.class);
 
     @Test
     public void postorderTest() {
@@ -27,12 +26,11 @@ public class TreePostorderTraversalTest {
         root.right.left = new TreeNode(3);
         root.right.right = null;
 
-        List<Integer> actualRes = new TreePostorderTraversal().postorderTraversal3(root);
+        List<Integer> actualRes = new TreePostorderTraversal().postorderTraversal(root);
 
         Integer[]  expectRes = {3, 2, 1};
 
         Assert.assertArrayEquals(expectRes, actualRes.toArray());
-
     }
 
 }

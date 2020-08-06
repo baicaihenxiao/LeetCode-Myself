@@ -161,7 +161,8 @@ class TreePostorderTraversal {
 
     public List<Integer> postorderTraversalMorris(TreeNode root) {
         List<Integer> res = new ArrayList<>();
-        TreeNode cur = root;
+        TreeNode cur = new TreeNode();
+        cur.left = root;
 
         while (null != cur) {
             if (null != cur.left) {
@@ -175,8 +176,7 @@ class TreePostorderTraversal {
                     cur = cur.left;
                 } else {
                     rightMostNodeOfLeftSubtree.right = null;
-
-                    res.add(cur.val);
+                    addMorrisList(cur.left, res);
                     cur = cur.right;
                 }
             } else {
@@ -185,6 +185,33 @@ class TreePostorderTraversal {
         }
 
         return res;
+    }
+
+    private void addMorrisList(TreeNode begin, List<Integer> res) {
+        begin = reverseList(begin);
+        TreeNode iter = begin;
+
+        while (null != iter) {
+            res.add(iter.val);
+            iter = iter.right;
+        }
+        // 恢复树结构，不恢复也可以
+        reverseList(begin);
+    }
+
+    // 206. Reverse Linked List
+    private TreeNode reverseList(TreeNode head) {
+        TreeNode pHead = new TreeNode();
+        while (head != null) {
+            // head向后走一步
+            TreeNode tmp = head;
+            head = head.right;
+
+            //更新结果pHead
+            tmp.right = pHead.right;
+            pHead.right = tmp;
+        }
+        return pHead.right;
     }
 
 
