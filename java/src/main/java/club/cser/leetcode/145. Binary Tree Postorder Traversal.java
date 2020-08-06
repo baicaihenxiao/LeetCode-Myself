@@ -18,6 +18,8 @@ enum TraversalOrder {
     }
 }
 
+
+// https://leetcode.wang/leetcode-145-Binary-Tree-Postorder-Traversal.html
 class TreePostorderTraversal {
 
     public List<Integer> postorderTraversal(TreeNode root) {
@@ -60,4 +62,132 @@ class TreePostorderTraversal {
         }
         return res;
     }
+
+
+    // https://leetcode.wang/leetcode-145-Binary-Tree-Postorder-Traversal.html#%E8%A7%A3%E6%B3%95%E4%B8%89-%E8%BD%AC%E6%8D%A2%E9%97%AE%E9%A2%98
+    // 根 => 右 => 左 reverse即是后序遍历的顺序。
+    public List<Integer> postorderTraversal1(TreeNode root) {
+        List<Integer> res = new ArrayList<>();
+
+        Stack<TreeNode> s = new Stack<>();
+        s.push(root);
+
+        while (!s.isEmpty()) {
+            TreeNode top = s.pop();
+
+            if (null != top) {
+                res.add(top.val);
+                s.push(top.left);
+                s.push(top.right);
+            }
+        }
+        Collections.reverse(res);
+        return res;
+    }
+
+    public List<Integer> postorderTraversal11(TreeNode root) {
+        LinkedList<Integer> res = new LinkedList<>(); // 用链表addFirst不用reverse，更快
+
+        Stack<TreeNode> s = new Stack<>();
+        s.push(root);
+
+        while (!s.isEmpty()) {
+            TreeNode top = s.pop();
+
+            if (null != top) {
+                res.addFirst(top.val);
+                s.push(top.left);
+                s.push(top.right);
+            }
+        }
+        return res;
+    }
+
+    // 每个节点放2次到栈里，根据弹出的节点和栈顶节点是否相等来判断第几次回溯根。
+    public List<Integer> postorderTraversal2(TreeNode root) {
+        List<Integer> res = new ArrayList<>();
+
+        Stack<TreeNode> s = new Stack<>();
+        s.push(root);
+        s.push(root);
+
+        while (!s.isEmpty()) {
+            TreeNode cur = s.pop();
+            if (cur == null)
+                continue;
+            if (!s.isEmpty() && cur == s.peek()) {
+                s.push(cur.right);
+                s.push(cur.right);
+                s.push(cur.left);
+                s.push(cur.left);
+            } else {
+                res.add(cur.val);
+            }
+        }
+        return res;
+    }
+
+
+    // https://en.wikipedia.org/wiki/Tree_traversal#Post-order
+    public List<Integer> postorderTraversal3(TreeNode root) {
+
+        Stack<TreeNode> path = new Stack<>();
+        List<Integer> res = new ArrayList<>();
+        TreeNode iter = root;
+        TreeNode lastVisited = null;
+
+        while (null != iter || !path.empty()) {
+
+            if (null != iter) {
+                path.push(iter);
+                iter = iter.left;
+                continue;
+            }
+
+            TreeNode cur = path.peek();
+
+            // 有右孩子节点，且不是从右孩子回来的
+            if (null != cur.right && lastVisited != cur.right) {
+                iter = cur.right;
+            } else {
+                path.pop();
+                res.add(cur.val);
+                lastVisited = cur;
+            }
+        }
+        return res;
+    }
+
+
+    public List<Integer> postorderTraversalMorris(TreeNode root) {
+        List<Integer> res = new ArrayList<>();
+        TreeNode cur = root;
+
+        while (null != cur) {
+            if (null != cur.left) {
+                TreeNode rightMostNodeOfLeftSubtree = cur.left;
+
+                while (rightMostNodeOfLeftSubtree.right != null && rightMostNodeOfLeftSubtree.right != cur)
+                    rightMostNodeOfLeftSubtree = rightMostNodeOfLeftSubtree.right;
+
+                if (rightMostNodeOfLeftSubtree.right == null) {
+                    rightMostNodeOfLeftSubtree.right = cur;
+                    cur = cur.left;
+                } else {
+                    rightMostNodeOfLeftSubtree.right = null;
+
+                    res.add(cur.val);
+                    cur = cur.right;
+                }
+            } else {
+                cur = cur.right;
+            }
+        }
+
+        return res;
+    }
+
+
+
+
 }

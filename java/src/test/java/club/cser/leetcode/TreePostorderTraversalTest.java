@@ -27,7 +27,7 @@ public class TreePostorderTraversalTest {
         root.right.left = new TreeNode(3);
         root.right.right = null;
 
-        List<Integer> actualRes = new TreePostorderTraversal().postorderTraversal(root);
+        List<Integer> actualRes = new TreePostorderTraversal().postorderTraversal3(root);
 
         Integer[]  expectRes = {3, 2, 1};
 
