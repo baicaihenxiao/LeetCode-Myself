@@ -1,5 +1,7 @@
 package club.cser.leetcode;
 
+import club.cser.commons.Converter;
+import club.cser.commons.MyAssert;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -42,9 +44,7 @@ public class SudokuSolverTest {
                 {'3','4','5','2','8','6','1','7','9'}
         };
         r.solveSudoku(board);
-        Function<char[][], String> f = param -> Arrays.stream(param).map(Arrays::toString).reduce((a, b) -> a + b).get();
-        Assert.assertEquals(f.apply(res),
-                f.apply(board));
+        MyAssert.assertEquals(res, board);
     }
 
 }
