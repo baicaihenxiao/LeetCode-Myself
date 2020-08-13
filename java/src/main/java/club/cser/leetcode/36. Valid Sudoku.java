@@ -5,7 +5,7 @@ import java.util.Set;
 
 class ValidSudoku {
     public boolean isValidSudoku(char[][] board) {
-        Set<String> sudoku = new HashSet();
+        Set<String> sudoku = new HashSet<>();
         for (int i = 0; i < board.length; i++) {
             for (int j = 0; j < board[i].length; j++) {
                 if ('.' != board[i][j]
@@ -22,7 +22,7 @@ class ValidSudoku {
     }
 
     public boolean isValidSudoku2(char[][] board) {
-        Set<Integer> sudoku = new HashSet();
+        Set<Integer> sudoku = new HashSet<>();
         for (int i = 0; i < board.length; i++) {
             for (int j = 0; j < board[i].length; j++) {
                 if ('.' != board[i][j] &&

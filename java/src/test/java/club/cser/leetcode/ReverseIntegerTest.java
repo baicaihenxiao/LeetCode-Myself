@@ -28,6 +28,8 @@ public class ReverseIntegerTest {
 
     @Test
     public void extremePositiveTest() {
+        Assert.assertEquals(0 ,r.reverse(Integer.MIN_VALUE));
+
         Assert.assertEquals(0 ,r.reverse(Integer.MAX_VALUE));
     }
 
