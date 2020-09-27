@@ -6,7 +6,7 @@ import org.junit.Test;
 
 import java.util.Arrays;
 
-public class CourseScheduleTestII {
+public class CourseScheduleIITest {
 
     CourseScheduleII c;
 
