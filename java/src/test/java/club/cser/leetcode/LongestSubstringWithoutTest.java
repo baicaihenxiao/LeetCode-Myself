@@ -11,7 +11,6 @@ public class LongestSubstringWithoutTest {
 
     static final Logger LOGGER = LogManager.getLogger(LongestSubstringWithoutTest.class);
 
-
     @Test
     public void sss() {
         LongestSubstringWithout t = new LongestSubstringWithout();
