@@ -9,6 +9,11 @@ public class Converter {
     public static String listToString(List<? extends Object> list) {
         return list.stream().map(Object::toString).collect(Collectors.joining(", "));
     }
+
+    public static String listToSortedString(List<? extends Object> list) {
+        return list.stream().map(Object::toString).sorted().collect(Collectors.joining("\n"));
+    }
+
     public static String charToString(char[][] chs) {
         return Arrays.stream(chs).map(Arrays::toString).reduce((a, b) -> a + b).get();
     }
