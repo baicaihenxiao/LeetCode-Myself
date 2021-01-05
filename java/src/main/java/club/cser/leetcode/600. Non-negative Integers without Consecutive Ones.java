@@ -26,8 +26,8 @@ class NonegativeIntegerswithoutConsecutiveOnes {
             oneLeading[i] = zeroLeading[i - 1];
         }
 
-        System.out.println(Arrays.toString(zeroLeading));
-        System.out.println(Arrays.toString(oneLeading));
+//        System.out.println(Arrays.toString(zeroLeading));
+//        System.out.println(Arrays.toString(oneLeading));
 
         // 转换成2进制
         String numStr = Integer.toBinaryString(num);
