@@ -15,7 +15,7 @@ public class CountDifferentPalindromicSubsequencesTest {
     // 'b', 'c', 'bb', 'cc', 'bcb', 'bccb'
     @Test
     public void basicTest1() {
-        String s = "abba";
+        String s = "bccb";
         int res = 6;
 
         Assert.assertEquals(res, l.countPalindromicSubsequences(s));
@@ -33,6 +33,14 @@ public class CountDifferentPalindromicSubsequencesTest {
     public void basicTest3() {
         String s = "abcdabcdabcdabcdabcdabcdabcdabcddcbadcbadcbadcbadcbadcbadcbadcba";
         int res = 104860361;
+
+        Assert.assertEquals(res, l.countPalindromicSubsequences(s));
+    }
+
+    @Test
+    public void basicTest4() {
+        String s = "bcbacbabdcbcbdcbddcaaccdcbbcdbcabbcdddadaadddbdbbbdacbabaabdddcaccccdccdbabcddbdcccabccbbcdbcdbdaada";
+        int res = 117990582;
 
         Assert.assertEquals(res, l.countPalindromicSubsequences(s));
     }
