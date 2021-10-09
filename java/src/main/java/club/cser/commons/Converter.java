@@ -19,6 +19,10 @@ public class Converter {
         return list.stream().map(Object::toString).sorted().collect(Collectors.joining("\n"));
     }
 
+    public static String intToString(int[][] intval) {
+        return Arrays.stream(intval).map(Arrays::toString).reduce((a, b) -> a + b).get();
+    }
+
     public static String charToString(char[][] chs) {
         return Arrays.stream(chs).map(Arrays::toString).reduce((a, b) -> a + b).get();
     }
